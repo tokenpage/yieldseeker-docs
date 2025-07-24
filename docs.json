@@ -11,32 +11,15 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Overview",
         "groups": [
           {
-            "group": "Getting started",
             "pages": [
               "index",
               "quickstart",
               "development"
             ]
           },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          }
         ]
       },
       {
@@ -84,8 +67,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://yielseeker.xyz"
+      "label": "Launch Yield Seeker",
+      "href": "https://beta.yieldseeker.xyz"
     }
   },
   "footer": {
