@@ -3,12 +3,53 @@ title: "Core Features"
 description: "Core features of Yield Seeker"
 ---
 
-## Overview
+## Infrastructure and Control
 
-Yield Seeker is built on a custodial smart contract infrastructure that allows users to delegate capital to autonomous agents for high-performance yield generation. While the platform is not currently self-custodial, it emphasizes transparency, operational clarity, and the ability to withdraw funds at any time. Each agent is deployed within an isolated smart account operated by a users personal AI agent.
+Yield Seeker is built on a custodial smart contract infrastructure that enables users to delegate capital to autonomous agents for high-performance yield generation. While the platform is not currently self-custodial, it is designed with transparency, operational clarity, and user control in mind. Withdrawals can be performed at any time.
 
-Once activated, the agent continuously monitors DeFi protocols on the Base network to identify optimal opportunities. It reallocates USDC across integrated vaults that offer superior risk-adjusted returns, factoring in real-time APYs, protocol incentives, and transaction costs. When market conditions shift, the agent can rebalance funds or initiate asset swaps to maximize overall yield efficiency.
+Each agent is deployed within an **isolated smart account**, tied exclusively to the user’s wallet. These agents operate independently, ensuring that user capital is never pooled or exposed to other accounts.
 
-All fund activity is visible through an intuitive performance dashboard that provides real-time performance data, historical transaction logs, and comprehensive yield reporting. Users can track how their capital is being allocated and perform a full withdrawal with a couple clicks.
+---
 
-Each Yield Seeker agent runs the **Autoseek** strategy by default. Autoseek handles portfolio optimization, reward conversion, and compounding without user input—ensuring that capital is constantly working to achieve the highest possible return with minimal friction or complexity.
+## Autonomous Strategy Execution
+
+Once activated, your personal AI agent begins scanning DeFi protocols on the **Base network** to identify optimal yield opportunities. It reallocates USDC across vaults that offer the highest risk-adjusted returns, taking into account:
+
+- Real-time APYs  
+- Protocol and ecosystem rewards  
+- Transaction costs  
+- Liquidity depth and slippage
+
+The agent acts continuously and autonomously, responding to market changes and rebalancing your portfolio when the net yield gain exceeds the cost of reallocation.
+
+---
+
+## Performance Dashboard
+
+All agent activity is tracked and surfaced through a **performance dashboard**. The dashboard includes:
+
+- Live vault allocations  
+- Accrued and realized earnings  
+- Adjusted APY tracking  
+- Complete transaction history  
+
+Users can monitor fund activity in real time and execute a full withdrawal with just a couple of clicks.
+
+---
+
+## Autoseek Strategy
+
+Each Yield Seeker agent runs the **Autoseek** strategy by default. Autoseek automates every step of yield generation:
+
+- Scanning and rebalancing across vaults  
+- Auto-compounding of earnings  
+- Converting volatile reward tokens into USDC  
+- Maintaining position in top-performing protocols  
+
+Autoseek is optimized for maximum growth, allowing users to benefit from continuous yield optimization with minimal friction or manual input.
+
+---
+
+## Talk to Your Agent
+
+Through the **Discuss** tab, users can speak directly with their agent in real time. You can ask your agent what it’s doing, why it made specific decisions, or what factors influenced a reallocation. This ability to speak directly with your agent enhances transparency and gives you deeper insight into your portfolio’s behavior—without requiring technical expertise.
