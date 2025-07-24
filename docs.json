@@ -29,13 +29,20 @@
         "pages": [
           "api-reference/introduction"
         ]
+      },
+      {
+        "tab": "Legal",
+        "pages": [
+          "legal/privacy-policy",
+          "legal/terms-of-service"
+        ]
       }
     ],
     "global": {
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://yieldseeker.mintlify.app/",
+          "href": "https://docs.yieldseeker.xyz/",
           "icon": "book-open-cover"
         },
         {
