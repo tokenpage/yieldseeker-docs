@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Yield Seeker",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#39FF14",
+    "light": "#4CFF27", 
+    "dark": "#2EE610"
   },
   "favicon": "/favicon.svg",
   "navigation": {
