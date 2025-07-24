@@ -12,25 +12,17 @@
     "tabs": [
       {
         "tab": "Overview",
-        "groups": [
-          {            
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          }
+        "pages": [
+          "index",
+          "quickstart",
+          "development",
+          "overview/overview"
         ]
       },
       {
         "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          }
+        "pages": [
+          "api-reference/introduction"
         ]
       }
     ],
