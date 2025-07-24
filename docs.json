@@ -13,13 +13,13 @@
       {
         "tab": "Overview",
         "groups": [
-          {
+          {            
             "pages": [
               "index",
               "quickstart",
               "development"
             ]
-          },
+          }
         ]
       },
       {
