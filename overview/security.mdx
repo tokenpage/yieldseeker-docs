@@ -1,8 +1,52 @@
 ---
-title: 'Security'
-description: 'Understanding Yield Seekers Security'
+title: "Security"
+description: "Understanding Yield Seekers Security"
 ---
 
-## What is Yield Seeker? 
+# Agent Security
 
-Yield Seeker is an autonomous yield optimization agent designed to maximize returns on stablecoin deposits across Base's leading lending protocols.
+Yield Seeker is designed with a strong focus on security, isolation, and user control. Every agent operates in an isolated smart wallet environment, ensuring that agents cannot access, view, or interact with each other’s funds. Each wallet is scoped to a single user, and only that user can initiate withdrawals.
+
+---
+
+## Isolated Agent Architecture
+
+Each AI agent operates in its own secure smart wallet. These wallets are fully isolated from one another, meaning no agent can access or interfere with another agent’s funds. This structure ensures strict separation of user assets and prevents any cross-agent vulnerabilities.
+
+Only the wallet owner has permission to withdraw funds. Yield Seeker never has custody of user assets and cannot move or access funds independently.
+
+---
+
+## Trusted Key Management
+
+Private keys are stored using **Coinbase’s Trusted Execution Environment (TEE)**. This infrastructure is designed to protect sensitive key material through encryption and hardware-based isolation. The TEE prevents unauthorized access to private keys, even from internal systems, and meets institutional-grade security standards.
+
+---
+
+## Smart Wallet Delegation via EIP-7702
+
+Yield Seeker wallets implement **EIP-7702**, enabling secure transaction delegation without exposing private keys. This allows your agent to execute transactions autonomously while minimizing attack surface and maintaining robust key security.
+
+Users can authorize transaction sessions without signing every step manually, striking a balance between automation and safety.
+
+---
+
+## Full User Control
+
+You maintain full control of your funds at all times. You can withdraw directly through the Yield Seeker interface at any point via the **Wallet** page. In the unlikely event that the platform becomes inaccessible, you can still retrieve your funds manually with our assistance.
+
+Withdrawals do not depend on Yield Seeker being online. Contact us if you require off-platform fund recovery.
+
+---
+
+## Gas Fees Covered
+
+As part of our integration with Coinbase's wallet infrastructure, **Yield Seeker covers all Base network gas fees** using Coinbase’s paymaster system. This means all vault rebalancing, reward harvesting, and reallocations happen without eating into your returns.
+
+By minimizing friction and operational costs, we help ensure that your capital compounds efficiently and your actual yield matches what’s displayed.
+
+---
+
+## Built for Safety and Autonomy
+
+Yield Seeker combines advanced infrastructure, smart contract design, and modern account abstraction standards to deliver a secure, automated experience. From wallet isolation to delegated execution and gas fee coverage, your funds remain protected, efficient, and under your full control.
