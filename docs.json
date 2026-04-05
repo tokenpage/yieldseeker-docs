@@ -72,7 +72,7 @@
     "primary": {
       "type": "button",
       "label": "Launch Yield Seeker",
-      "href": "https://beta.yieldseeker.xyz"
+      "href": "https://app.yieldseeker.xyz"
     }
   },
   "footer": {
