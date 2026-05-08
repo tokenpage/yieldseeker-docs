@@ -1,3 +1,7 @@
+---
+title: "Introduction"
+---
+
 ## `GET /v1/platform-stats`
 
 Returns aggregated platform-wide statistics.
@@ -24,7 +28,7 @@ No parameters required.
 ### Response Fields
 
 | Field | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `userCount` | integer | Total number of registered users on the platform |
 | `agentCount` | integer | Total number of agents across all users |
 | `totalTvlUsd` | float | Total value locked across all agents, in USD |
@@ -33,7 +37,6 @@ No parameters required.
 | `totalTransactionValueUsd` | float | Total USD value of all transactions executed by agents |
 | `apy75thPercentile` | float | 75th percentile APY across active agents (as a percentage, e.g. `8.42` = 8.42%) |
 | `apyMax` | float | Highest APY observed across active agents (as a percentage) |
-
 
 ## `GET /v1/agent-analytics`
 
@@ -85,7 +88,7 @@ No parameters required.
 #### `agentAnalytics[]`
 
 | Field | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `agentWalletAddress` | string | Checksummed EIP-55 address of the agent's wallet |
 | `createdDate` | datetime | When this analytics record was created (ISO 8601) |
 | `chainId` | integer | Chain ID the agent is operating on (e.g. `8453` for Base) |
@@ -95,7 +98,7 @@ No parameters required.
 #### `agentAnalytics[].snapshot`
 
 | Field | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `agentWalletSnapshotId` | integer | Unique ID of this snapshot |
 | `createdDate` | datetime | When the snapshot was first created (ISO 8601) |
 | `updatedDate` | datetime | When the snapshot was last updated (ISO 8601) |
@@ -115,4 +118,6 @@ No parameters required.
 | `apy90d` | float | Annualised yield based on last 90 days |
 | `apyAllTime` | float | Annualised yield since `apyStartDate` |
 | `apyStartDate` | date | Date from which all-time APY is calculated (ISO 8601, date only) |
+
+```text
 ```
