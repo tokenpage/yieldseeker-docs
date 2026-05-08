@@ -1,4 +1,118 @@
----
-title: "Coming Soon"
-description: "API Reference Coming Soon"
----
+## `GET /v1/platform-stats`
+
+Returns aggregated platform-wide statistics.
+
+### Request
+
+No parameters required.
+
+### Response
+
+```json
+{
+  "userCount": 1234,
+  "agentCount": 5678,
+  "totalTvlUsd": 9500000.00,
+  "totalYieldEarnedUsd": 123456.78,
+  "totalTransactionCount": 98765,
+  "totalTransactionValueUsd": 4200000.00,
+  "apy75thPercentile": 8.42,
+  "apyMax": 24.15
+}
+```
+
+### Response Fields
+
+| Field | Type | Description |
+|---|---|---|
+| `userCount` | integer | Total number of registered users on the platform |
+| `agentCount` | integer | Total number of agents across all users |
+| `totalTvlUsd` | float | Total value locked across all agents, in USD |
+| `totalYieldEarnedUsd` | float | Cumulative yield earned across all agents, in USD |
+| `totalTransactionCount` | integer | Total number of transactions executed by agents |
+| `totalTransactionValueUsd` | float | Total USD value of all transactions executed by agents |
+| `apy75thPercentile` | float | 75th percentile APY across active agents (as a percentage, e.g. `8.42` = 8.42%) |
+| `apyMax` | float | Highest APY observed across active agents (as a percentage) |
+
+
+## `GET /v1/agent-analytics`
+
+Returns a list of analytics snapshots for all agents across the platform.
+
+### Request
+
+No parameters required.
+
+### Response
+
+```json
+{
+  "agentAnalytics": [
+    {
+      "agentWalletAddress": "0xAbc...123",
+      "createdDate": "2026-05-08T12:00:00Z",
+      "chainId": 8453,
+      "assetAddress": "0xDef...456",
+      "snapshot": {
+        "agentWalletSnapshotId": 1,
+        "createdDate": "2026-05-08T12:00:00Z",
+        "updatedDate": "2026-05-08T12:00:00Z",
+        "agentId": "agent-uuid",
+        "tokenBalances": { "0xToken...": "1000000000000000000" },
+        "tokenBalancesBase": { "0xToken...": "1000000000000000000" },
+        "totalValueBase": "5000000000000000000",
+        "netDepositTokenBalances": { "0xToken...": "500000000000000000" },
+        "netDepositTokenBalancesBase": { "0xToken...": "500000000000000000" },
+        "netDepositsBase": "500000000000000000",
+        "cumulativeYieldBase": "12345678900000000",
+        "baseAssetPriceUsd": 1.0,
+        "baseAssetDecimals": 18,
+        "apy1d": 7.23,
+        "apy7d": 6.85,
+        "apy30d": 6.50,
+        "apy90d": 6.10,
+        "apyAllTime": 5.90,
+        "apyStartDate": "2025-01-01"
+      }
+    },
+    ...
+  ]
+}
+```
+
+### Response Fields
+
+#### `agentAnalytics[]`
+
+| Field | Type | Description |
+|---|---|---|
+| `agentWalletAddress` | string | Checksummed EIP-55 address of the agent's wallet |
+| `createdDate` | datetime | When this analytics record was created (ISO 8601) |
+| `chainId` | integer | Chain ID the agent is operating on (e.g. `8453` for Base) |
+| `assetAddress` | string | Checksummed address of the asset being tracked |
+| `snapshot` | object | Latest portfolio snapshot for this agent (see below) |
+
+#### `agentAnalytics[].snapshot`
+
+| Field | Type | Description |
+|---|---|---|
+| `agentWalletSnapshotId` | integer | Unique ID of this snapshot |
+| `createdDate` | datetime | When the snapshot was first created (ISO 8601) |
+| `updatedDate` | datetime | When the snapshot was last updated (ISO 8601) |
+| `agentId` | string | Unique identifier of the agent |
+| `tokenBalances` | object | Map of token address → raw token balance (as string integer) |
+| `tokenBalancesBase` | object | Map of token address → balance denominated in the base asset (as string integer) |
+| `totalValueBase` | string | Total portfolio value in base asset units (as string integer) |
+| `netDepositTokenBalances` | object | Map of token address → net deposited balance (as string integer) |
+| `netDepositTokenBalancesBase` | object | Map of token address → net deposited balance in base asset units (as string integer) |
+| `netDepositsBase` | string | Total net deposits in base asset units (as string integer) |
+| `cumulativeYieldBase` | string | Total yield earned since inception in base asset units (as string integer) |
+| `baseAssetPriceUsd` | float | Price of the base asset in USD at snapshot time |
+| `baseAssetDecimals` | integer | Decimal precision of the base asset (e.g. `18`) |
+| `apy1d` | float | Annualised yield based on last 1 day (as a percentage, e.g. `7.23` = 7.23%) |
+| `apy7d` | float | Annualised yield based on last 7 days |
+| `apy30d` | float | Annualised yield based on last 30 days |
+| `apy90d` | float | Annualised yield based on last 90 days |
+| `apyAllTime` | float | Annualised yield since `apyStartDate` |
+| `apyStartDate` | date | Date from which all-time APY is calculated (ISO 8601, date only) |
+```
