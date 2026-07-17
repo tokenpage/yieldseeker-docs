@@ -1,0 +1,102 @@
+---
+title: "Vault Selection"
+description: "How Yield Seeker evaluates supported DeFi vaults."
+---
+
+# Vault Selection
+
+Yield Seeker evaluates every supported vault using a combination of objective eligibility requirements, risk controls, and user-defined preferences.
+
+Rather than relying on a single risk score, multiple independent signals are considered before capital is allocated.
+
+---
+
+## Eligibility Requirements
+
+Before a vault becomes eligible, it must satisfy minimum operational requirements.
+
+These include:
+
+- minimum total value locked (TVL)
+- sufficient withdrawable liquidity
+- supported vault type
+- acceptable collateral composition
+- protocol availability
+
+Vaults that fail these requirements are excluded before scoring begins.
+
+---
+
+## Liquidity
+
+Yield generation is only useful if positions can be exited efficiently.
+
+Yield Seeker evaluates available withdrawable liquidity and limits allocations where necessary to reduce the likelihood of becoming a disproportionate participant within any individual vault.
+
+Rather than rejecting otherwise suitable opportunities, allocations may be reduced to match available liquidity.
+
+---
+
+## Diversification
+
+Concentrating an entire portfolio inside a single protocol introduces unnecessary risk.
+
+The allocation engine therefore applies portfolio constraints that limit exposure to individual vaults, helping diversify capital across multiple opportunities where appropriate.
+
+---
+
+## Supported Protocol Types
+
+Not every DeFi strategy is treated equally.
+
+By default, Yield Seeker prioritises established overcollateralised lending markets.
+
+More advanced strategy types, such as aggregator vaults, can be enabled through different risk profiles where appropriate.
+
+---
+
+## Collateral Quality
+
+Yield Seeker evaluates the assets underlying each supported vault.
+
+Certain collateral assets may be excluded entirely, while additional on-chain liquidity analysis helps identify assets with limited market depth or trading activity.
+
+This helps reduce exposure to illiquid or higher-risk collateral.
+
+---
+
+## User Rules
+
+Users are able to customise how their own agent allocates capital.
+
+Examples include:
+
+- Never use a particular vault.
+- Only allocate to specific protocols.
+- Always maintain a minimum allocation to one protocol.
+- Prefer stable returns over short-term APY spikes.
+- Limit maximum exposure to an individual vault.
+
+These preferences become persistent rules for that individual agent and are automatically incorporated into future allocation decisions.
+
+---
+
+## Conservative and Explorative Profiles
+
+Every agent operates using a configurable risk profile.
+
+The default **Conservative** profile prioritises larger, more established opportunities with stricter allocation constraints.
+
+The **Explorative** profile broadens the range of eligible opportunities while maintaining the same execution safeguards.
+
+Users can switch between profiles or create more specific rules through natural language conversations with their agent.
+
+---
+
+## Curated Protocol Support
+
+Yield Seeker currently maintains a curated set of supported protocols and vaults.
+
+New integrations undergo technical review before being registered within the protocol and are only made available after completing the administrative approval process and four-day timelock.
+
+This ensures that execution remains restricted to protocols that have been explicitly reviewed and approved.

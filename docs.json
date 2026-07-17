@@ -35,6 +35,53 @@
           "legal/privacy-policy",
           "legal/terms-of-service"
         ]
+      },
+      {
+        "tab": "Protocol Documentation - WIP Update",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "overview",
+              "design-principles",
+              "how-it-works"
+            ]
+          },
+          {
+            "group": "Protocol",
+            "pages": [
+              "protocol-architecture",
+              "agent-wallet",
+              "execution-model",
+              "adapter-system",
+              "security-model"
+            ]
+          },
+          {
+            "group": "Risk Management",
+            "pages": [
+              "decision-pipeline",
+              "vault-selection",
+              "continuous-monitoring",
+              "exit-and-recovery"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "fees",
+              "faq",
+              "glossary"
+            ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              "privacy-policy",
+              "terms-of-service"
+            ]
+          }
+        ]
       }
     ],
     "global": {

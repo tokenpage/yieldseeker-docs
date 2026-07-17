@@ -1,0 +1,97 @@
+---
+title: "Continuous Monitoring"
+description: "How Yield Seeker continuously evaluates protocols, markets, and portfolio health."
+---
+
+# Continuous Monitoring
+
+Portfolio management does not end once funds have been allocated.
+
+Markets evolve continuously. Yields change, liquidity fluctuates, incentives expire, and new opportunities emerge. Yield Seeker continuously reassesses the state of supported protocols to determine whether an existing allocation remains the most appropriate choice.
+
+Rather than making a single allocation decision and leaving capital untouched, the allocation engine periodically reevaluates every active portfolio using fresh on-chain data.
+
+---
+
+## Verify, Don't Trust
+
+Wherever possible, Yield Seeker reads protocol state directly from smart contracts rather than relying on third-party dashboards or protocol-reported statistics.
+
+This philosophy reduces dependence on external services and ensures allocation decisions are based on the current on-chain state of each supported protocol.
+
+---
+
+## What Is Monitored?
+
+The allocation engine continuously evaluates multiple aspects of every supported opportunity, including:
+
+- Total Value Locked (TVL)
+- Withdrawable liquidity
+- Available lending capacity
+- Protocol interest rates
+- Vault share prices
+- Reward emissions
+- Collateral composition
+- Underlying asset quality
+- Protocol-specific oracle data
+
+These inputs are combined with the user's own allocation rules and portfolio constraints before any decision is made.
+
+---
+
+## Direct On-Chain Reads
+
+Whenever practical, Yield Seeker derives information directly from protocol contracts.
+
+Examples include:
+
+- TVL and available liquidity
+- Maximum deposit capacity
+- Collateral dependencies
+- Vault accounting
+- Lending rates
+- Share prices
+
+This allows the protocol to verify conditions independently instead of trusting external APIs or protocol-reported metrics.
+
+---
+
+## Asset Quality Assessment
+
+Yield Seeker also evaluates the quality of collateral assets backing supported vaults.
+
+Rather than simply accepting that an asset is liquid because it has been listed by another protocol, the allocation engine considers factors such as:
+
+- on-chain liquidity
+- trading volume
+- market depth
+- transaction activity
+
+Assets that fail internal quality requirements may be excluded from allocation.
+
+---
+
+## Continuous Portfolio Optimisation
+
+As market conditions evolve, the allocation engine determines whether rebalancing would improve expected long-term returns.
+
+When appropriate, agents may:
+
+- move capital between supported protocols
+- rebalance portfolio allocations
+- compound earned rewards
+- convert reward tokens into the portfolio's base asset
+
+Execution only occurs when the expected benefit justifies the associated transaction costs and remains consistent with the user's configured risk preferences.
+
+---
+
+## Continuous Risk Assessment
+
+Monitoring is not limited to yield opportunities.
+
+The allocation engine also evaluates whether existing positions continue to satisfy the protocol's eligibility requirements.
+
+If a supported protocol no longer satisfies those requirements, the engine may reduce or remove exposure where possible.
+
+This allows portfolios to adapt as the ecosystem evolves rather than relying on static assumptions established at the time of deposit.

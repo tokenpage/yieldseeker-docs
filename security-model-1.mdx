@@ -1,0 +1,116 @@
+---
+title: "Security Model"
+---
+
+# Security Model
+
+Yield Seeker's security model is built around a simple principle:
+
+> **Rather than trusting any single component, the protocol constrains what every component is allowed to do.**
+
+The result is a layered security architecture where multiple independent protections work together to reduce risk. Even if one layer were compromised, additional safeguards continue to protect user assets.
+
+---
+
+## Defense in Depth
+
+Yield Seeker combines several independent security mechanisms.
+
+- Isolated Agent Wallets
+- Protocol-specific adapter validation
+- Registered protocol allowlists
+- Hardware-backed key management
+- Hardware-backed multisignature administration
+- Four-day administrative timelock
+- Continuous protocol monitoring
+- Emergency execution pause
+- User-controlled withdrawals
+
+Each layer exists to reduce the impact of failures elsewhere in the system.
+
+---
+
+## Threat Model
+
+The protocol is designed around realistic failure scenarios rather than assuming every component behaves perfectly.
+
+### Server Compromise
+
+If the Yield Seeker backend were compromised, an attacker would still be unable to arbitrarily transfer user funds.
+
+This is because Agent Wallets cannot execute arbitrary transactions. Every operation must pass through registered adapters, which validate both the destination protocol and the parameters being executed.
+
+Even a compromised operator can only attempt actions already permitted by the protocol.
+
+---
+
+### Malicious Transaction Parameters
+
+Traditional delegated wallets often restrict **which functions** may be called but not **how those functions are called**.
+
+Yield Seeker validates both.
+
+For example, swap operations verify that assets are returned to the user's own wallet, preventing transactions from redirecting funds elsewhere.
+
+This parameter-level validation is one of the protocol's primary security guarantees.
+
+---
+
+### Malicious or Unsupported Protocols
+
+Agents cannot interact with arbitrary protocols.
+
+Every supported vault, lending market, swap router, or reward distributor must first be registered within the on-chain Adapter Registry.
+
+If a protocol is not registered, agents cannot reach it.
+
+---
+
+### Administrative Compromise
+
+Administrative changes are protected through hardware-backed multisignature approval and a four-day timelock.
+
+This includes:
+
+- registering new protocol adapters
+- enabling additional supported vaults
+- extending protocol capabilities
+
+The timelock provides transparency and gives users an opportunity to review upcoming changes before they become active.
+
+---
+
+### Emergency Situations
+
+If suspicious behaviour is detected, Yield Seeker can immediately pause protocol execution.
+
+This prevents agents from executing additional protocol interactions while preserving user ownership of funds.
+
+Importantly, pausing execution does **not** prevent users from withdrawing assets from their wallets.
+
+---
+
+## Independent Verification
+
+Yield Seeker's smart contracts have been independently audited by **Nethermind**.
+
+The audit reviewed core contract logic, execution flows, fund management, and permission controls prior to deployment.
+
+- [View Smart Contract Repository](https://github.com/tokenpage/yieldseeker-contracts)
+- [View Nethermind Audit Report](https://github.com/tokenpage/yieldseeker-contracts/blob/main/audits/20260305-nethermind.pdf)
+
+Security reviews are one component of our overall security model and complement—not replace—the architectural safeguards described throughout this documentation.
+
+---
+
+## Security Philosophy
+
+No protocol can eliminate risk entirely.
+
+Instead, Yield Seeker seeks to minimise risk through constrained execution, transparent architecture, independent verification, and continuous monitoring.
+
+Every security decision is guided by three principles:
+
+- Constrain execution wherever possible.
+- Verify protocol state directly on-chain.
+- Preserve user control at every stage.
