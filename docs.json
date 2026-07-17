@@ -42,43 +42,43 @@
           {
             "group": "Introduction",
             "pages": [
-              "overview",
-              "design-principles",
-              "how-it-works"
+              "introduction/overview",
+              "introduction/design-principles",
+              "introduction/how-it-works"
             ]
           },
           {
             "group": "Protocol",
             "pages": [
-              "protocol-architecture",
-              "agent-wallet",
-              "execution-model",
-              "adapter-system",
-              "security-model"
+              "protocol/protocol-architecture",
+              "protocol/agent-wallet",
+              "protocol/execution-model",
+              "protocol/adapter-system",
+              "protocol/security-model"
             ]
           },
           {
             "group": "Risk Management",
             "pages": [
-              "decision-pipeline",
-              "vault-selection",
-              "continuous-monitoring",
-              "exit-and-recovery"
+              "risk-management/decision-pipeline",
+              "risk-management/vault-selection",
+              "risk-management/continuous-monitoring",
+              "risk-management/exit-and-recovery"
             ]
           },
           {
             "group": "Reference",
             "pages": [
-              "fees",
-              "faq",
-              "glossary"
+              "reference/fees",
+              "reference/faq",
+              "reference/glossary"
             ]
           },
           {
             "group": "Legal",
             "pages": [
-              "privacy-policy",
-              "terms-of-service"
+              "legal-/privacy-policy",
+              "legal-/terms-of-service"
             ]
           }
         ]
