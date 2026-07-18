@@ -12,31 +12,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Overview",
-        "pages": [
-          "overview/overview",
-          "overview/how-it-works",
-          "overview/core-features",          
-          "overview/security",
-          "overview/fees",
-          "overview/faqs",
-          "overview/glossary"
-        ]
-      },
-      {
-        "tab": "API reference",
-        "pages": [
-          "api-reference/introduction"
-        ]
-      },
-      {
-        "tab": "Legal",
-        "pages": [
-          "legal/privacy-policy",
-          "legal/terms-of-service"
-        ]
-      },
-      {
         "tab": "Protocol Documentation - WIP Update",
         "groups": [
           {
@@ -82,6 +57,33 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API reference",
+        "pages": [
+          "api-reference/introduction"
+        ]
+      },
+      {
+        "tab": "Overview - OLD",
+        "hidden": true,
+        "pages": [
+          "overview/overview",
+          "overview/how-it-works",
+          "overview/core-features",
+          "overview/security",
+          "overview/fees",
+          "overview/faqs",
+          "overview/glossary"
+        ]
+      },
+      {
+        "tab": "Legal - OLD",
+        "pages": [
+          "legal/privacy-policy",
+          "legal/terms-of-service"
+        ],
+        "hidden": true
       }
     ],
     "global": {
