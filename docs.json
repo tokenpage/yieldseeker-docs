@@ -48,13 +48,6 @@
               "reference/faq",
               "reference/glossary"
             ]
-          },
-          {
-            "group": "Legal",
-            "pages": [
-              "legal-/privacy-policy",
-              "legal-/terms-of-service"
-            ]
           }
         ]
       },
@@ -62,6 +55,13 @@
         "tab": "API reference",
         "pages": [
           "api-reference/introduction"
+        ]
+      },
+      {
+        "tab": "Legal",
+        "pages": [
+          "legal/privacy-policy",
+          "legal/terms-of-service"
         ]
       },
       {
@@ -76,14 +76,6 @@
           "overview/faqs",
           "overview/glossary"
         ]
-      },
-      {
-        "tab": "Legal - OLD",
-        "pages": [
-          "legal/privacy-policy",
-          "legal/terms-of-service"
-        ],
-        "hidden": true
       }
     ],
     "global": {
