@@ -1,129 +1,125 @@
 ---
 title: "Protocol Architecture"
-description: "A high-level overview of how Yield Seeker's protocol components work together."
+description: "A high-level overview of the major components that make up the Yieldseeker protocol."
 ---
 
 # Protocol Architecture
 
-Yield Seeker is built around a modular execution framework that combines autonomous portfolio management with protocol-enforced security constraints.
+Yieldseeker is built around autonomous **Agents** that manage individual user portfolios.
 
-Rather than relying on trust in a central operator, every component has a clearly defined responsibility. The allocation engine decides **what** should happen, while the smart contract infrastructure strictly controls **what is actually allowed** to happen.
+Each Agent combines AI-powered intelligence with an autonomous allocation engine and a constrained on-chain execution framework, allowing portfolios to be managed automatically while preserving user ownership and protocol-enforced security.
+
+Rather than relying on trust in a central operator, responsibility is divided across several independent components. This separation allows the protocol to evolve over time while reducing overall system risk.
 
 ```mermaid
-flowchart LR
+flowchart TD
 
 User["User"]
 
-Wallet["Agent Wallet"]
+subgraph Agent["Yieldseeker Agent"]
+    Intelligence["Agent Intelligence"]
+    Engine["Allocation Engine (Autoseek)"]
+    Execution["Execution Framework"]
 
-Engine["Allocation Engine"]
+    Intelligence --> Engine
+    Engine --> Execution
+end
 
-Registry["Adapter Registry"]
+Protocols["Supported DeFi Protocols"]
 
-Adapter["Protocol Adapter"]
-
-Protocol["Supported DeFi Protocol"]
-
-User --> Wallet
-Engine --> Wallet
-Wallet --> Registry
-Registry --> Adapter
-Adapter --> Protocol
+User --> Intelligence
+Execution --> Protocols
 ```
 
-The protocol is intentionally layered. Each component performs one specific role while limiting the responsibilities of every other component.
+Every Agent operates independently. It understands user preferences, manages portfolio allocations, and safely executes transactions through the protocol's execution framework.
 
 ---
 
 ## User
 
-Every user owns one or more Agent Wallets.
+Every user creates one or more Yieldseeker Agents.
 
-Users remain the ultimate owners of their assets throughout the lifetime of the wallet and retain the ability to withdraw funds or leave the protocol at any time.
-
-Users can also customise how their agent behaves through natural-language rules, allowing each wallet to operate with different investment preferences.
+Although portfolio management is autonomous, users always retain ownership of their assets. They can fund their Agent Wallet, customise behaviour, update their investment style, or withdraw at any time.
 
 ---
 
-## Agent Wallet
+## Yieldseeker Agent
 
-The Agent Wallet is the on-chain account that holds user assets.
+A Yieldseeker Agent is an autonomous portfolio manager created specifically for an individual user.
 
-Rather than interacting directly with DeFi protocols, the allocation engine operates through this wallet under strict permission controls.
+Rather than being a single component, an Agent combines three specialised systems that work together:
 
-Each wallet is completely isolated from every other wallet within the protocol.
+- **Agent Intelligence**, which understands user intent and enables natural interaction.
+- **Allocation Engine (Autoseek)**, which continuously evaluates opportunities and determines how capital should be allocated.
+- **Execution Framework**, which validates and executes approved on-chain transactions.
 
-The wallet is responsible for:
-
-- holding assets
-- executing validated transactions
-- recording ownership
-- enforcing withdrawal permissions
-- maintaining user-level security controls
+Separating these responsibilities allows each subsystem to evolve independently while maintaining strong security guarantees.
 
 ---
 
-## Allocation Engine
+## Agent Intelligence
 
-The allocation engine continuously evaluates supported DeFi opportunities and determines how capital should be allocated.
+Agent Intelligence is how users interact with their Agent.
 
-Before execution, every candidate passes through a structured decision pipeline consisting of:
+Powered by AI, it enables natural-language conversations through features such as **Discuss** and **Steer**, allowing users to:
 
-1. Candidate discovery
-2. Eligibility filtering
-3. Risk scoring
-4. Allocation constraints
-5. Execution
+- ask questions about portfolio decisions
+- personalise portfolio behaviour
+- express investment preferences
+- understand how their Agent is operating
 
-The engine determines **what should happen**, but it does not have unrestricted authority to execute arbitrary blockchain transactions.
+It remembers relevant preferences over time and translates them into structured rules that influence future allocation decisions.
 
----
-
-## Adapter Registry
-
-The Adapter Registry acts as the protocol's permission layer.
-
-It maintains the list of:
-
-- approved adapters
-- approved protocol targets
-- supported vaults
-- supported integrations
-
-If a protocol or contract has not been registered, it is unreachable by the execution framework.
-
-This provides an on-chain allowlist that constrains every portfolio action.
+Agent Intelligence focuses on understanding user intent—it never executes blockchain transactions directly.
 
 ---
 
-## Protocol Adapters
+## Allocation Engine (Autoseek)
 
-Adapters translate generic portfolio actions into protocol-specific transactions.
+Autoseek is the Agent's autonomous portfolio management engine.
 
-Each adapter understands the protocol it integrates with and validates every transaction before execution.
+It continuously evaluates supported opportunities and determines how capital should be allocated based on:
 
-Depending on the protocol, adapters may verify:
+- expected risk-adjusted returns
+- the selected investment style
+- personalised user preferences
+- current market conditions
+- protocol-defined risk constraints
 
-- recipient addresses
-- supported assets
-- vault registration
-- collateral compatibility
-- protocol-specific parameters
+The Allocation Engine determines **what should happen**.
 
-Only after validation succeeds is execution permitted.
+Every proposed action must still be validated by the Execution Framework before it can occur on-chain.
+
+Learn more in **Decision Pipeline**.
 
 ---
 
-## Supported Protocols
+## Execution Framework
 
-Yield Seeker currently supports a curated selection of established DeFi protocols on Base.
+The Execution Framework safely converts portfolio decisions into blockchain transactions.
 
-Examples include:
+It consists of several protocol components working together, including:
 
-- Aave
+- **Agent Wallets**, which securely hold user assets
+- the **Adapter Registry**, which defines approved integrations
+- **Protocol Adapters**, which validate protocol-specific transactions before execution
+
+Together these components ensure that every transaction is validated and constrained by protocol-defined security rules.
+
+Learn more in **Execution Model** and **Adapter System**.
+
+---
+
+## Supported DeFi Protocols
+
+Yieldseeker currently integrates with a curated selection of established DeFi protocols on Base.
+
+These include:
+
 - Morpho
-- Compound
+- Aave
 - Spark
+- Compound
 - ERC-4626 vaults
 
 Additional integrations may be introduced over time through the protocol's administrative extension process.
@@ -132,65 +128,28 @@ Additional integrations may be introduced over time through the protocol's admin
 
 ## Administrative Controls
 
-Yield Seeker is designed to evolve without compromising security.
+Yieldseeker is designed to evolve without compromising security.
 
-Supporting a new protocol or introducing new execution capabilities requires:
+Supporting new protocols or introducing additional execution capabilities requires:
 
 - smart contract extensions
 - hardware-backed multisignature approval
 - a four-day administrative timelock
 
-This gives users advance notice before new functionality becomes available.
+This provides users with advance notice before new functionality becomes available.
 
 ---
 
-## Security Layers
+## Security Through Separation
 
-No single component is responsible for protecting user assets.
+Each major subsystem within an Agent has a deliberately limited responsibility.
 
-Instead, security emerges from multiple independent layers working together.
+**Agent Intelligence** understands user intent.
 
-```mermaid
-flowchart TD
+The **Allocation Engine** determines how capital should be managed.
 
-Agent["Allocation Engine"]
+The **Execution Framework** validates and executes permitted transactions.
 
-Wallet["Agent Wallet"]
+Users retain ownership of their assets throughout the entire process.
 
-Adapter["Adapter Validation"]
-
-Registry["Protocol Allowlist"]
-
-User["User Ownership"]
-
-Agent --> Wallet
-Wallet --> Adapter
-Adapter --> Registry
-Registry --> User
-```
-
-Even if one layer were compromised, additional protections continue limiting what can occur.
-
----
-
-## Design Principles
-
-The protocol is built around three guiding principles.
-
-### Constrained Execution
-
-Agents can only perform explicitly authorised actions.
-
-Execution is restricted by adapters, protocol allowlists, and parameter validation.
-
----
-
-### Verify, Don't Trust
-
-Portfolio decisions rely on direct on-chain observations wherever possible rather than third-party reported data.
-
----
-
-### User Sovereignty
-
-Users retain ownership of their assets throughout the lifetime of their Agent Wallet and always maintain a path to withdraw from the protocol.
+This separation of responsibilities reduces system complexity, limits trust assumptions, and allows each subsystem to evolve independently without compromising the overall security model.
