@@ -7,15 +7,32 @@ description: "How Yieldseeker Agents understand user intent and personalise port
 
 Agent Intelligence is the AI-powered layer that allows users to interact naturally with their Yieldseeker Agent.
 
-Rather than configuring complex settings or writing rules manually, users simply describe their preferences through conversation. Agent Intelligence interprets those requests, remembers relevant information, and translates them into structured portfolio constraints that guide future allocation decisions.
+Every Agent is capable of managing a portfolio autonomously from the moment it is created. Users who simply want automated portfolio management can choose an investment style, deposit their assets, and allow the Agent to manage the portfolio independently.
+
+For users who want greater control, Agent Intelligence enables natural-language interaction that allows portfolios to be personalised over time.
 
 Agent Intelligence focuses on understanding user intent. It does not directly execute blockchain transactions or manage assets on-chain.
 
 ---
 
-## Natural-Language Interaction
+## Autonomous by Default
 
-Users communicate with their Agent through features such as **Discuss** and **Steer**.
+Yieldseeker is designed to reduce the amount of work required to manage a DeFi portfolio—not create more of it.
+
+Every Agent begins with sensible default behaviour based on the selected investment style:
+
+- **Conservative**, which prioritises established protocols and lower-risk opportunities.
+- **Explorative**, which considers a broader range of eligible opportunities while continuing to respect the protocol's risk constraints.
+
+For many users, selecting an investment style is all that's required. The Agent will continue managing the portfolio autonomously without any further interaction.
+
+---
+
+## Personalising Your Agent
+
+Users who want more control can gradually personalise how their Agent behaves.
+
+Through features such as **Discuss** and **Steer**, users can express preferences in natural language instead of configuring complex settings manually.
 
 Examples include:
 
@@ -24,17 +41,17 @@ Examples include:
 - "Never allocate more than 20% to a single vault."
 - "Avoid protocols with low liquidity."
 
-Rather than exposing complex configuration options, Agent Intelligence converts natural language into portfolio preferences.
+Rather than exposing complex configuration options, Agent Intelligence interprets these requests and converts them into portfolio preferences that guide future allocation decisions.
 
 ---
 
-## Personalised Behaviour
+## Remembered Preferences
 
 Every Agent can behave differently.
 
 As users continue interacting with their Agent, relevant preferences are remembered and incorporated into future portfolio decisions.
 
-Examples of personalised behaviour include:
+Examples include:
 
 - preferred protocols
 - preferred asset types
@@ -42,13 +59,13 @@ Examples of personalised behaviour include:
 - diversification preferences
 - liquidity requirements
 
-This allows portfolio management to become increasingly tailored over time while remaining easy to modify.
+These preferences can be updated, refined, or removed over time, allowing portfolio management to evolve alongside the user's objectives.
 
 ---
 
 ## Explaining Decisions
 
-Agent Intelligence also helps users understand how their portfolio is managed.
+Agent Intelligence also helps users understand how their portfolio is being managed.
 
 Users can ask questions such as:
 
@@ -57,7 +74,7 @@ Users can ask questions such as:
 - Why wasn't another protocol chosen?
 - Which preferences influenced this decision?
 
-Providing transparent explanations helps users understand how autonomous decisions are made without requiring them to inspect raw blockchain transactions.
+Providing transparent explanations helps users understand autonomous decisions without requiring them to inspect raw blockchain transactions or protocol-specific data.
 
 ---
 
@@ -83,7 +100,7 @@ Preferences --> Rules
 Rules --> Engine
 ```
 
-The Allocation Engine then evaluates available opportunities while respecting those preferences.
+The Allocation Engine then evaluates available opportunities while respecting those preferences alongside the Agent's selected investment style.
 
 ---
 

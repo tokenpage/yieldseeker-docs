@@ -9,7 +9,7 @@ Yieldseeker uses a defence-in-depth security model.
 
 Rather than relying on a single protection mechanism, security is achieved through multiple independent layers that work together to reduce risk and constrain execution.
 
-Each layer protects a different part of the system, helping limit the impact of individual failures.
+Each layer protects a different part of the system, helping limit the impact of individual failures while ensuring users remain in control of their assets.
 
 ---
 
@@ -27,15 +27,15 @@ Portfolio management may be autonomous, but ownership always remains with the us
 
 The Allocation Engine cannot execute arbitrary blockchain transactions.
 
-Every action must pass through the Execution Framework, where it is validated against protocol-defined rules before execution.
+Every proposed action must pass through the Execution Framework, where it is validated against protocol-defined rules before execution.
 
-This significantly limits the set of actions an Agent can perform.
+By separating portfolio decision-making from transaction execution, Yieldseeker significantly limits the actions an Agent can perform on-chain.
 
 ---
 
 ## Layered Validation
 
-Multiple validation layers work together before every transaction.
+Multiple validation layers work together before every transaction is executed.
 
 These include:
 
@@ -44,21 +44,27 @@ These include:
 - parameter validation
 - protocol compatibility checks
 
-Transactions that fail validation are rejected before execution.
+Transactions that fail validation are rejected before execution, reducing the likelihood of unintended or unsafe interactions.
+
+---
+
+## Secure Delegated Execution
+
+Yieldseeker uses **EIP-7702** to enable secure delegated transaction execution.
+
+Rather than exposing private keys or granting unrestricted permissions, delegated execution allows an Agent to perform only authorised actions on behalf of the user.
+
+Combined with the protocol's constrained execution model, delegated permissions remain narrowly scoped while preserving user ownership of assets.
 
 ---
 
 ## Infrastructure Security
 
-Yieldseeker uses secure infrastructure to protect execution credentials.
+Execution credentials are protected using **Coinbase Trusted Execution Environments (TEE)**.
 
-This includes:
+Sensitive cryptographic operations take place inside hardware-isolated environments, helping protect key material from exposure to both external attackers and internal infrastructure.
 
-- Coinbase Trusted Execution Environments (TEE)
-- encrypted key management
-- hardware-backed execution
-
-Sensitive cryptographic operations occur within isolated hardware environments rather than general-purpose infrastructure.
+This approach provides a significantly stronger security boundary than software-only key management.
 
 ---
 
@@ -71,13 +77,13 @@ Administrative actions require:
 - hardware-backed multisignature approval
 - a four-day timelock before activation
 
-This provides transparency and allows users to review changes before they take effect.
+This provides transparency and allows users to review upcoming protocol changes before they take effect.
 
 ---
 
 ## Operational Security
 
-The protocol continuously monitors supported integrations and execution infrastructure.
+Yieldseeker continuously monitors both supported integrations and execution infrastructure.
 
 Operational controls include:
 
@@ -90,22 +96,45 @@ These controls help reduce operational risk while allowing the protocol to evolv
 
 ---
 
-## Audits
+## Audits & Open Source
 
-Yieldseeker's smart contracts undergo independent security reviews before deployment.
+Yieldseeker's smart contracts have been independently audited by **Nethermind**, a leading blockchain security firm.
 
-Audit reports are published publicly as they become available.
+The audit reviewed the protocol's core execution framework, wallet architecture, and fund management logic prior to deployment. All critical and high-severity findings were addressed before release.
 
-Security reviews complement—but do not replace—the protocol's layered security architecture.
+The full audit report is publicly available, and the underlying smart contracts are open source for transparency.
+
+- **Audit Report:** [https://github.com/tokenpage/yieldseeker-contracts/blob/main/audits/20260305-nethermind.pdf](https://github.com/tokenpage/yieldseeker-contracts/blob/main/audits/20260305-nethermind.pdf)
+- **Smart Contracts:** [https://github.com/tokenpage/yieldseeker-contracts](https://github.com/tokenpage/yieldseeker-contracts)
+
+Independent audits complement—but do not replace—the protocol's layered security architecture.
 
 ---
 
-## Security Through Separation
+## Recovery & User Control
 
-The protocol deliberately separates intelligence, decision-making, and execution into independent subsystems.
+Agent Wallets exist independently of the Yieldseeker interface.
 
-- **Agent Intelligence** understands user intent.
-- The **Allocation Engine** determines portfolio allocations.
-- The **Execution Framework** validates and executes transactions.
+Even if the web application were unavailable, users retain ownership of their assets through their on-chain wallet. Recovery paths remain available through the underlying blockchain infrastructure.
 
-This separation reduces trust assumptions, limits system complexity, and allows each layer to evolve independently while preserving the protocol's overall security guarantees.
+The Yieldseeker interface provides the most convenient way to manage an Agent, but it is not the source of ownership.
+
+Because every Agent Wallet is an on-chain account, ownership ultimately derives from the blockchain rather than the Yieldseeker application itself.
+
+---
+
+## Defence in Depth
+
+No single security mechanism protects the protocol.
+
+Instead, Yieldseeker combines multiple independent layers that reinforce one another:
+
+- isolated Agent Wallets
+- constrained execution
+- protocol validation
+- EIP-7702 delegated execution
+- Coinbase Trusted Execution Environments
+- hardware-backed multisignature governance
+- independent smart contract audits
+
+This layered approach reduces trust assumptions, limits attack surface, and allows the protocol to remain resilient even if individual safeguards were ever to fail.
