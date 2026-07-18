@@ -1,102 +1,132 @@
 ---
 title: "Vault Selection"
-description: "How Yield Seeker evaluates supported DeFi vaults."
+description: "How Yieldseeker evaluates and selects DeFi vaults for portfolio allocation."
 ---
 
 # Vault Selection
 
-Yield Seeker evaluates every supported vault using a combination of objective eligibility requirements, risk controls, and user-defined preferences.
+Vault selection is a progressive process rather than a single scoring event.
 
-Rather than relying on a single risk score, multiple independent signals are considered before capital is allocated.
+Before capital can be allocated, every candidate vault passes through multiple stages of evaluation. Rather than relying on a single risk score, Autoseek progressively filters, evaluates, and ranks opportunities using a broad set of protocol-defined parameters together with user-defined preferences and constraints.
+
+These parameters assess different aspects of a vault's suitability, helping ensure that every allocation reflects both protocol safeguards and the user's investment objectives.
+
+```mermaid
+flowchart LR
+
+Candidate["Candidate Vault"]
+
+Eligibility["Eligibility"]
+
+Constraints["Protocol & Portfolio Constraints"]
+
+Preferences["User Preferences & Constraints"]
+
+Selection["Eligible for Allocation"]
+
+Candidate --> Eligibility
+Eligibility --> Constraints
+Constraints --> Preferences
+Preferences --> Selection
+```
 
 ---
 
-## Eligibility Requirements
+## Eligibility
 
-Before a vault becomes eligible, it must satisfy minimum operational requirements.
+Every candidate vault must first satisfy a set of objective eligibility parameters before it can be considered for allocation.
 
-These include:
+These parameters determine whether a vault is fundamentally compatible with the protocol and include factors such as:
 
-- minimum total value locked (TVL)
-- sufficient withdrawable liquidity
+- integration through the Execution Framework
+- supported protocol
 - supported vault type
-- acceptable collateral composition
-- protocol availability
+- supported assets
+- operational availability
 
-Vaults that fail these requirements are excluded before scoring begins.
-
----
-
-## Liquidity
-
-Yield generation is only useful if positions can be exited efficiently.
-
-Yield Seeker evaluates available withdrawable liquidity and limits allocations where necessary to reduce the likelihood of becoming a disproportionate participant within any individual vault.
-
-Rather than rejecting otherwise suitable opportunities, allocations may be reduced to match available liquidity.
+Only protocols that have been explicitly integrated through dedicated protocol adapters are eligible for consideration. Candidate vaults that fail any mandatory eligibility requirement are excluded before further evaluation begins.
 
 ---
 
-## Diversification
+## Protocol Constraints
 
-Concentrating an entire portfolio inside a single protocol introduces unnecessary risk.
-
-The allocation engine therefore applies portfolio constraints that limit exposure to individual vaults, helping diversify capital across multiple opportunities where appropriate.
-
----
-
-## Supported Protocol Types
-
-Not every DeFi strategy is treated equally.
-
-By default, Yield Seeker prioritises established overcollateralised lending markets.
-
-More advanced strategy types, such as aggregator vaults, can be enabled through different risk profiles where appropriate.
-
----
-
-## Collateral Quality
-
-Yield Seeker evaluates the assets underlying each supported vault.
-
-Certain collateral assets may be excluded entirely, while additional on-chain liquidity analysis helps identify assets with limited market depth or trading activity.
-
-This helps reduce exposure to illiquid or higher-risk collateral.
-
----
-
-## User Rules
-
-Users are able to customise how their own agent allocates capital.
+Eligible vaults are then evaluated using protocol-specific parameters that assess the characteristics of the underlying strategy.
 
 Examples include:
 
-- Never use a particular vault.
-- Only allocate to specific protocols.
-- Always maintain a minimum allocation to one protocol.
-- Prefer stable returns over short-term APY spikes.
-- Limit maximum exposure to an individual vault.
+- collateral quality
+- supported strategy type
+- protocol-specific risk considerations
+- restricted or unsupported assets
 
-These preferences become persistent rules for that individual agent and are automatically incorporated into future allocation decisions.
+These parameters help ensure that allocations remain consistent with the protocol's supported investment universe.
 
 ---
 
-## Conservative and Explorative Profiles
+## Liquidity Constraints
 
-Every agent operates using a configurable risk profile.
+Yield generation is only valuable if positions can be entered and exited efficiently.
 
-The default **Conservative** profile prioritises larger, more established opportunities with stricter allocation constraints.
+Liquidity parameters evaluate factors such as:
+
+- total value locked (TVL)
+- withdrawable liquidity
+- market depth
+- concentration relative to vault size
+
+Rather than rejecting otherwise suitable opportunities, allocation sizes may be adjusted to remain proportionate to available liquidity.
+
+---
+
+## Portfolio Constraints
+
+Vaults are evaluated not only individually, but also in the context of the overall portfolio.
+
+Portfolio parameters help maintain balanced exposure by considering factors such as:
+
+- diversification across protocols
+- concentration within individual vaults
+- overall portfolio composition
+- exposure to similar strategies
+
+These constraints help reduce unnecessary concentration risk while maintaining efficient capital allocation.
+
+---
+
+## User Preferences & Constraints
+
+Users can personalise how their Agent allocates capital by defining persistent preferences and allocation rules.
+
+Examples include:
+
+- never use a particular vault
+- only allocate to specific protocols
+- maintain a minimum allocation to one protocol
+- limit maximum exposure to an individual vault
+- prefer stable returns over short-term APY increases
+
+These preferences and constraints become persistent rules for that individual Agent and are automatically incorporated into future allocation decisions.
+
+---
+
+## Investment Profile
+
+Every Agent operates using a configurable investment profile.
+
+The default **Conservative** profile prioritises larger, more established opportunities with stricter selection parameters and allocation constraints.
 
 The **Explorative** profile broadens the range of eligible opportunities while maintaining the same execution safeguards.
 
-Users can switch between profiles or create more specific rules through natural language conversations with their agent.
+The selected investment profile establishes the default selection behaviour before any user-defined preferences or constraints are applied.
 
 ---
 
-## Curated Protocol Support
+## Continuous Evolution
 
-Yield Seeker currently maintains a curated set of supported protocols and vaults.
+The vault selection framework is designed to evolve over time.
 
-New integrations undergo technical review before being registered within the protocol and are only made available after completing the administrative approval process and four-day timelock.
+As new protocols, strategies, and market conditions emerge, Yieldseeker continuously refines the parameters used to evaluate opportunities while preserving the overall decision pipeline.
 
-This ensures that execution remains restricted to protocols that have been explicitly reviewed and approved.
+New protocol integrations undergo technical review before dedicated protocol adapters are developed and registered within the Adapter Registry. They only become eligible for allocation after completing the administrative approval process and four-day timelock.
+
+This approach allows the allocation framework to improve over time while ensuring that execution remains restricted to explicitly reviewed and approved protocol integrations.

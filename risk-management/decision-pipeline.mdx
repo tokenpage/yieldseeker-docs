@@ -4,68 +4,64 @@ title: "Decision Pipeline"
 
 # Decision Pipeline
 
-Every time a Yield Seeker agent considers reallocating capital, it follows the same structured decision process.
+Every time a Yieldseeker Agent evaluates whether to rebalance a portfolio, it follows the same structured decision process.
 
-Rather than selecting the highest advertised APY, candidate opportunities pass through multiple stages of evaluation before execution is considered.
+Rather than simply selecting the highest advertised APY, every candidate opportunity passes through multiple stages of evaluation before execution is considered.
 
 ```mermaid
 flowchart TD
     Candidates["Candidate Vaults"]
-    Eligibility["Eligibility Filters"]
-    Scoring["Risk & Yield Scoring"]
+    Eligibility["Eligibility"]
+    Assessment["Opportunity Assessment"]
     Allocation["Allocation Constraints"]
     Execution["Execution"]
 
     Candidates --> Eligibility
-    Eligibility --> Scoring
-    Scoring --> Allocation
+    Eligibility --> Assessment
+    Assessment --> Allocation
     Allocation --> Execution
 ```
 
-Each stage reduces the candidate set until only suitable allocations remain.
+Each stage progressively narrows the candidate set until only suitable allocations remain.
 
 ---
 
 ## Stage 1 — Candidate Discovery
 
-The allocation engine begins by identifying supported vaults across the Base ecosystem.
+The Allocation Engine begins by identifying candidate vaults across the supported protocol ecosystem.
 
-Only protocols that have been registered within Yield Seeker's execution framework are considered.
+Only protocols that have been explicitly integrated into the Execution Framework through dedicated protocol adapters are considered. Protocols outside the Adapter Registry are excluded from consideration entirely.
 
-Protocols outside the allowlist are ignored entirely.
+This ensures that every candidate opportunity originates from a protocol that has been reviewed, integrated, and approved by the protocol.
 
 ---
 
-## Stage 2 — Eligibility Filters
+## Stage 2 — Eligibility
 
-Each candidate vault is evaluated against a series of binary checks.
+Each candidate vault is evaluated against a set of objective eligibility parameters.
+
+These parameters determine whether a vault is fundamentally compatible with the protocol before further assessment takes place.
 
 Examples include:
 
-- minimum TVL
+- supported protocol
 - supported vault type
-- collateral exclusions
-- protocol availability
-- liquidity requirements
-- user-defined restrictions
+- supported assets
+- operational availability
 
-If any mandatory condition fails, the vault is removed from consideration before scoring begins.
+Candidate vaults that fail any mandatory eligibility requirement are excluded before further assessment begins.
 
 ---
 
-## Stage 3 — Risk & Yield Scoring
+## Stage 3 — Opportunity Assessment
 
-Eligible vaults are then ranked.
+Eligible vaults are then assessed across multiple parameters.
 
-Rather than optimising purely for APY, the scoring engine considers multiple dimensions simultaneously, including:
+Rather than optimising purely for APY, the Allocation Engine considers multiple dimensions simultaneously, including expected yield, liquidity, collateral quality, market conditions, and other protocol-defined parameters.
 
-- expected yield
-- protocol incentives
-- historical stability
-- liquidity depth
-- transaction costs
+This enables Autoseek to identify opportunities that balance yield, liquidity, and portfolio quality rather than reacting to short-term yield fluctuations.
 
-This allows the allocation engine to optimise for long-term returns rather than reacting to short-term yield spikes.
+For more information about the parameters used during this stage, see **Vault Selection**.
 
 ---
 
@@ -75,28 +71,28 @@ Before execution, additional portfolio-level constraints are applied.
 
 These include:
 
+- diversification requirements
 - concentration limits
-- maximum exposure per vault
-- user allocation rules
-- forced allocations
-- protocol-specific limits
+- protocol exposure
+- user preferences and constraints
+- investment profile
 
-Even the highest-scoring vault may receive only part of a portfolio if diversification constraints require it.
+Even the highest-ranked opportunity may receive only part of a portfolio if broader allocation constraints require a more balanced distribution of capital.
 
 ---
 
 ## Stage 5 — Execution
 
-Only after every previous stage has completed successfully does the execution engine begin interacting with supported protocols.
+Only after every previous stage has completed successfully does the Execution Framework begin interacting with supported protocols.
 
-Execution itself is performed through the protocol's constrained adapter framework, ensuring every transaction satisfies protocol-defined security checks.
+Every transaction is validated through the protocol's constrained execution architecture before being submitted on-chain, ensuring that all execution remains restricted to approved protocol adapters and protocol-defined security rules.
 
 ---
 
 ## Explainable Decisions
 
-Every allocation follows the same deterministic pipeline.
+Every allocation follows the same deterministic decision pipeline.
 
-Users can inspect these decisions through the **Discuss** tab by asking their agent why a portfolio change occurred or why a particular vault was selected.
+Users can ask their Agent why a portfolio change occurred or why a particular vault was selected.
 
 This makes portfolio management transparent rather than opaque.
