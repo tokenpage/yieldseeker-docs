@@ -51,9 +51,9 @@
             "group": "Protocol",
             "pages": [
               "protocol/protocol-architecture",
-              "protocol/agent-wallet",
-              "protocol/execution-model",
-              "protocol/adapter-system",
+              "protocol/agent-intelligence",
+              "protocol/allocation-engine",
+              "protocol/execution-framework",
               "protocol/security-model"
             ]
           },

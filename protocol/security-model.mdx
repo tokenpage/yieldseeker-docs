@@ -1,116 +1,111 @@
 ---
 title: "Security Model"
+description: "The layered security model that protects user assets throughout the Yieldseeker protocol."
 ---
 
 # Security Model
 
-Yield Seeker's security model is built around a simple principle:
+Yieldseeker uses a defence-in-depth security model.
 
-> **Rather than trusting any single component, the protocol constrains what every component is allowed to do.**
+Rather than relying on a single protection mechanism, security is achieved through multiple independent layers that work together to reduce risk and constrain execution.
 
-The result is a layered security architecture where multiple independent protections work together to reduce risk. Even if one layer were compromised, additional safeguards continue to protect user assets.
-
----
-
-## Defense in Depth
-
-Yield Seeker combines several independent security mechanisms.
-
-- Isolated Agent Wallets
-- Protocol-specific adapter validation
-- Registered protocol allowlists
-- Hardware-backed key management
-- Hardware-backed multisignature administration
-- Four-day administrative timelock
-- Continuous protocol monitoring
-- Emergency execution pause
-- User-controlled withdrawals
-
-Each layer exists to reduce the impact of failures elsewhere in the system.
+Each layer protects a different part of the system, helping limit the impact of individual failures.
 
 ---
 
-## Threat Model
+## User Ownership
 
-The protocol is designed around realistic failure scenarios rather than assuming every component behaves perfectly.
+Users remain the owners of their assets at all times.
 
-### Server Compromise
+Each Agent operates through its own isolated Agent Wallet, and only the wallet owner can withdraw assets.
 
-If the Yield Seeker backend were compromised, an attacker would still be unable to arbitrarily transfer user funds.
-
-This is because Agent Wallets cannot execute arbitrary transactions. Every operation must pass through registered adapters, which validate both the destination protocol and the parameters being executed.
-
-Even a compromised operator can only attempt actions already permitted by the protocol.
+Portfolio management may be autonomous, but ownership always remains with the user.
 
 ---
 
-### Malicious Transaction Parameters
+## Constrained Execution
 
-Traditional delegated wallets often restrict **which functions** may be called but not **how those functions are called**.
+The Allocation Engine cannot execute arbitrary blockchain transactions.
 
-Yield Seeker validates both.
+Every action must pass through the Execution Framework, where it is validated against protocol-defined rules before execution.
 
-For example, swap operations verify that assets are returned to the user's own wallet, preventing transactions from redirecting funds elsewhere.
-
-This parameter-level validation is one of the protocol's primary security guarantees.
+This significantly limits the set of actions an Agent can perform.
 
 ---
 
-### Malicious or Unsupported Protocols
+## Layered Validation
 
-Agents cannot interact with arbitrary protocols.
+Multiple validation layers work together before every transaction.
 
-Every supported vault, lending market, swap router, or reward distributor must first be registered within the on-chain Adapter Registry.
+These include:
 
-If a protocol is not registered, agents cannot reach it.
+- Adapter Registry allowlists
+- protocol-specific adapters
+- parameter validation
+- protocol compatibility checks
+
+Transactions that fail validation are rejected before execution.
 
 ---
 
-### Administrative Compromise
+## Infrastructure Security
 
-Administrative changes are protected through hardware-backed multisignature approval and a four-day timelock.
+Yieldseeker uses secure infrastructure to protect execution credentials.
 
 This includes:
 
-- registering new protocol adapters
-- enabling additional supported vaults
-- extending protocol capabilities
+- Coinbase Trusted Execution Environments (TEE)
+- encrypted key management
+- hardware-backed execution
 
-The timelock provides transparency and gives users an opportunity to review upcoming changes before they become active.
-
----
-
-### Emergency Situations
-
-If suspicious behaviour is detected, Yield Seeker can immediately pause protocol execution.
-
-This prevents agents from executing additional protocol interactions while preserving user ownership of funds.
-
-Importantly, pausing execution does **not** prevent users from withdrawing assets from their wallets.
+Sensitive cryptographic operations occur within isolated hardware environments rather than general-purpose infrastructure.
 
 ---
 
-## Independent Verification
+## Administrative Security
 
-Yield Seeker's smart contracts have been independently audited by **Nethermind**.
+Protocol upgrades are protected through governance controls.
 
-The audit reviewed core contract logic, execution flows, fund management, and permission controls prior to deployment.
+Administrative actions require:
 
-- [View Smart Contract Repository](https://github.com/tokenpage/yieldseeker-contracts)
-- [View Nethermind Audit Report](https://github.com/tokenpage/yieldseeker-contracts/blob/main/audits/20260305-nethermind.pdf)
+- hardware-backed multisignature approval
+- a four-day timelock before activation
 
-Security reviews are one component of our overall security model and complement—not replace—the architectural safeguards described throughout this documentation.
+This provides transparency and allows users to review changes before they take effect.
 
 ---
 
-## Security Philosophy
+## Operational Security
 
-No protocol can eliminate risk entirely.
+The protocol continuously monitors supported integrations and execution infrastructure.
 
-Instead, Yield Seeker seeks to minimise risk through constrained execution, transparent architecture, independent verification, and continuous monitoring.
+Operational controls include:
 
-Every security decision is guided by three principles:
+- continuous protocol monitoring
+- emergency adapter pause capabilities
+- ongoing infrastructure maintenance
+- incident response procedures
 
-- Constrain execution wherever possible.
-- Verify protocol state directly on-chain.
-- Preserve user control at every stage.
+These controls help reduce operational risk while allowing the protocol to evolve over time.
+
+---
+
+## Audits
+
+Yieldseeker's smart contracts undergo independent security reviews before deployment.
+
+Audit reports are published publicly as they become available.
+
+Security reviews complement—but do not replace—the protocol's layered security architecture.
+
+---
+
+## Security Through Separation
+
+The protocol deliberately separates intelligence, decision-making, and execution into independent subsystems.
+
+- **Agent Intelligence** understands user intent.
+- The **Allocation Engine** determines portfolio allocations.
+- The **Execution Framework** validates and executes transactions.
+
+This separation reduces trust assumptions, limits system complexity, and allows each layer to evolve independently while preserving the protocol's overall security guarantees.
