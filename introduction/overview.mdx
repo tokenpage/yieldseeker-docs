@@ -9,35 +9,33 @@ Yieldseeker is an autonomous yield optimization protocol that uses AI agents to 
 
 Each user deploys a dedicated agent that continuously evaluates supported opportunities, reallocates capital when appropriate, and compounds returns over time—all within a constrained execution framework designed to prioritise security, transparency, and user control.
 
-Unlike traditional yield vaults that follow a single predefined strategy, Yieldseeker continuously evaluates multiple opportunities across supported protocols. Agents adapt as market conditions evolve, reallocating capital whenever expected long-term, risk-adjusted returns improve while accounting for liquidity, incentives, and transaction costs.
+Rather than requiring users to manually compare yields, monitor protocols, claim rewards, and rebalance positions, Yieldseeker automates portfolio management while keeping users in control of their assets. The result is an intelligent, continuously managed DeFi portfolio without the operational complexity traditionally associated with decentralized finance.
 
 ---
 
 ## Design Principles
 
-Yieldseeker is built around three core principles.
+Every aspect of Yieldseeker is guided by five core principles.
 
-### Constrained Execution
+```mermaid
+flowchart TB
 
-Agents are only permitted to perform explicitly authorised actions. Every transaction passes through protocol-specific validation before it can be executed, ensuring that agents cannot perform arbitrary blockchain operations.
+Core["Yieldseeker"]
 
-Learn more in the **Execution Model** and **Adapter System** sections.
+Core --> AI["AI-First"]
+Core --> Simple["Simplicity Through Automation"]
+Core --> Execution["Constrained Execution"]
+Core --> Verify["Verify, Don't Trust"]
+Core --> Sovereignty["User Sovereignty"]
+```
 
----
+- **AI-First** — Autonomous AI agents continuously evaluate opportunities and manage portfolios on behalf of users.
+- **Simplicity Through Automation** — Advanced DeFi strategies should be effortless to use without sacrificing transparency.
+- **Constrained Execution** — Agents operate within strict protocol-defined execution rules rather than unrestricted authority.
+- **Verify, Don't Trust** — Decisions are based on independently verifiable on-chain information wherever possible.
+- **User Sovereignty** — Users retain ownership of their assets and remain in control at all times.
 
-### Verify, Don't Trust
-
-Wherever possible, Yieldseeker derives information directly from on-chain state instead of relying on third-party reported metrics. Portfolio decisions are based on protocol data, vault state, liquidity, and collateral information read directly from smart contracts.
-
-Learn more in **Continuous Monitoring**.
-
----
-
-### User Sovereignty
-
-Users remain in control of their assets at all times. Funds are held inside isolated Agent Wallets, withdrawals are always initiated by the wallet owner, and administrative changes are protected by hardware-backed multisignature controls and a four-day timelock.
-
-Learn more in **Security Model** and **Exit & Recovery**.
+Learn more in **Design Principles**.
 
 ---
 
@@ -55,7 +53,9 @@ flowchart LR
     Wallet --> Protocols
 ```
 
-Each user owns an isolated Agent Wallet. The allocation engine manages this wallet within strict protocol-defined constraints, continuously interacting with supported DeFi protocols on behalf of the user.
+Each user owns an isolated Agent Wallet.
+
+The allocation engine continuously evaluates supported opportunities and determines how capital should be allocated, while the protocol's execution framework ensures every action complies with predefined security constraints before interacting with supported DeFi protocols.
 
 ---
 
@@ -71,7 +71,7 @@ Yieldseeker is designed to support multiple assets. Support for additional asset
 
 This documentation is organised into four sections:
 
-- **Introduction** introduces Yieldseeker and explains the principles that guide its design.
-- **Protocol** explains the underlying architecture, execution model, and security framework.
-- **Risk Management** describes how the allocation engine evaluates opportunities and manages portfolio risk.
+- **Introduction** explains the philosophy behind Yieldseeker and how the protocol works.
+- **Protocol** covers the underlying architecture, execution model, and security framework.
+- **Risk Management** explains how the allocation engine evaluates opportunities and manages portfolio risk.
 - **Reference** contains supporting documentation, frequently asked questions, and protocol terminology.

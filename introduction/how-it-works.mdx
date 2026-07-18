@@ -1,11 +1,13 @@
 ---
 title: "How It Works"
-description: "Creating an agent and how autonomous yield optimisation works."
+description: "Creating an agent and how autonomous portfolio management works."
 ---
 
 # How It Works
 
-Yield Seeker is designed to make sophisticated DeFi portfolio management accessible through a simple workflow. After an agent has been created and funded, it operates autonomously while remaining constrained by the protocol's security model.
+Yieldseeker is designed to make sophisticated DeFi portfolio management feel effortless.
+
+After creating an agent, selecting an investment style, and depositing supported assets, your agent begins managing your portfolio autonomously. If you want greater control, you can also customise its behaviour simply by talking to it.
 
 ---
 
@@ -13,7 +15,7 @@ Yield Seeker is designed to make sophisticated DeFi portfolio management accessi
 
 Begin by connecting a supported wallet on the Base network.
 
-Your connected wallet becomes the owner of a dedicated **Agent Wallet**, which will hold and manage your deposited assets.
+Your connected wallet becomes the owner of a dedicated **Agent Wallet**, which securely holds and manages your deposited assets.
 
 ---
 
@@ -21,82 +23,105 @@ Your connected wallet becomes the owner of a dedicated **Agent Wallet**, which w
 
 Creating an agent deploys an isolated smart wallet associated exclusively with your account.
 
-Each agent is independent. Users can operate multiple agents simultaneously, each with different assets, strategies, or custom rules.
+Each agent is completely independent. You can create multiple agents, each with different assets, investment styles, or personalised preferences.
 
 ---
 
-## Step 3 — Deposit Funds
+## Step 3 — Choose an Investment Style
 
-Deposit USDC into your agent wallet.
+Every new agent begins with a default investment style that determines how it approaches portfolio management.
 
-Once funded, the agent becomes eligible to begin allocating capital across supported protocols.
+- **Conservative** focuses on established vaults with proven track records.
+- **Explorative** targets higher yields across a broader range of supported opportunities.
 
----
-
-## Step 4 — Let the Agent Work
-
-From this point onwards, the allocation engine continuously evaluates supported vaults across the Base ecosystem.
-
-Rather than remaining invested in a single protocol indefinitely, the agent continually compares opportunities and reallocates capital whenever doing so improves expected net returns after accounting for transaction costs and risk constraints.
-
-```mermaid
-flowchart TD
-    Deposit["Deposit USDC"]
-    Scan["Evaluate Candidate Vaults"]
-    Score["Risk & Yield Analysis"]
-    Execute["Allocate Capital"]
-    Monitor["Continuous Monitoring"]
-
-    Deposit --> Scan
-    Scan --> Score
-    Score --> Execute
-    Execute --> Monitor
-    Monitor --> Scan
-```
+These presets provide sensible defaults while remaining fully customisable over time.
 
 ---
 
-## Autoseek Strategy
+## Step 4 — Deposit Supported Assets
 
-Every Yield Seeker agent runs **Autoseek**, the platform's default allocation strategy.
+Deposit supported assets into your Agent Wallet.
+
+Once funded, your agent becomes eligible to begin allocating capital across supported DeFi protocols.
+
+---
+
+## Step 5 — Autoseek Goes to Work
+
+Every Yieldseeker agent runs **Autoseek**, the protocol's autonomous portfolio management engine.
 
 Autoseek continuously:
 
 - evaluates supported vaults
+- analyses yield opportunities and portfolio risk
 - reallocates capital when appropriate
 - compounds earned rewards
-- converts reward tokens back into the base asset
 - minimises unnecessary transaction costs
 
-Rather than chasing the highest advertised APY, Autoseek seeks the highest **risk-adjusted** return over time.
+Rather than chasing the highest advertised APY, Autoseek seeks the highest long-term **risk-adjusted** return while respecting your selected investment style and any preferences you have configured.
+
+```mermaid
+flowchart TD
+    Deposit["Deposit Assets"]
+    Evaluate["Evaluate Candidate Vaults"]
+    Analyse["Risk & Yield Analysis"]
+    Allocate["Allocate Capital"]
+    Monitor["Continuous Monitoring"]
+
+    Deposit --> Evaluate
+    Evaluate --> Analyse
+    Analyse --> Allocate
+    Allocate --> Monitor
+    Monitor --> Evaluate
+```
 
 ---
 
-## Explainable Decisions
+## Personalise Your Agent
 
-Every portfolio decision made by an agent can be inspected through the **Discuss** tab.
+Your agent works immediately using its default investment style, but you can refine its behaviour at any time.
 
-Users can ask questions such as:
+Through the **Discuss** tab, you can speak naturally with your agent and describe how you would like it to manage your portfolio.
 
-- Why was my portfolio rebalanced?
+For example:
+
+- "Only use Morpho vaults."
+- "Prefer stable yields over maximum returns."
+- "Only consider vaults with at least \$10 million in TVL."
+- "Always ensure there's sufficient liquidity for withdrawals."
+
+Yieldseeker remembers these preferences and converts them into structured rules that directly influence how Autoseek manages your portfolio.
+
+As your preferences evolve, your agent evolves with them.
+
+---
+
+## Discuss With Your Agent
+
+The **Discuss** tab also allows you to understand what your agent is doing and why.
+
+You can ask questions such as:
+
+- Why did you rebalance my portfolio?
 - Why did you choose this vault?
 - Why didn't you move into another opportunity?
 - What risks are you currently considering?
+- What rules are you currently following?
 
-The agent explains its reasoning in natural language, providing transparency into its decision-making process without requiring users to understand the underlying implementation.
+The agent explains its reasoning in natural language, making sophisticated portfolio management transparent without requiring you to understand the underlying implementation.
 
 ---
 
-## Human Control
+## You're Always In Control
 
-Although portfolio management is automated, users remain in control.
+Although portfolio management is autonomous, you remain in control of your assets and your agent.
 
-You may:
+At any time you can:
 
-- withdraw funds at any time
-- customise your agent's behaviour
-- specify vault preferences
-- create allocation rules
-- deactivate an agent whenever you choose
+- withdraw your funds
+- change your investment style
+- update your preferences
+- create or remove custom rules
+- deactivate your agent whenever you choose
 
-Automation is designed to reduce operational complexity—not to remove user control.
+Yieldseeker automates the complexity of managing a DeFi portfolio, while ensuring that ownership, control, and decision-making preferences always remain yours.
