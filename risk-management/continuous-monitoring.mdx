@@ -1,97 +1,115 @@
 ---
 title: "Continuous Monitoring"
-description: "How Yield Seeker continuously evaluates protocols, markets, and portfolio health."
+description: "How Yieldseeker continuously evaluates protocols, markets, and portfolio health."
 ---
 
 # Continuous Monitoring
 
 Portfolio management does not end once funds have been allocated.
 
-Markets evolve continuously. Yields change, liquidity fluctuates, incentives expire, and new opportunities emerge. Yield Seeker continuously reassesses the state of supported protocols to determine whether an existing allocation remains the most appropriate choice.
+Markets evolve continuously. Yields change, liquidity fluctuates, incentives expire, and new opportunities emerge. Rather than making a single allocation decision at deposit, the Allocation Engine continuously reassesses both existing positions and alternative opportunities as market conditions evolve.
 
-Rather than making a single allocation decision and leaving capital untouched, the allocation engine periodically reevaluates every active portfolio using fresh on-chain data.
+Monitoring is continuous, but changes are only made when they improve portfolio quality or enhance user safety.
 
 ---
 
 ## Verify, Don't Trust
 
-Wherever possible, Yield Seeker reads protocol state directly from smart contracts rather than relying on third-party dashboards or protocol-reported statistics.
+Wherever practical, Yieldseeker reads protocol state directly from smart contracts rather than relying on third-party dashboards or protocol-reported statistics.
 
-This philosophy reduces dependence on external services and ensures allocation decisions are based on the current on-chain state of each supported protocol.
+This philosophy reduces dependence on external services and helps ensure allocation decisions are based on the current on-chain state of each supported protocol.
 
 ---
 
 ## What Is Monitored?
 
-The allocation engine continuously evaluates multiple aspects of every supported opportunity, including:
+The Allocation Engine continuously evaluates multiple aspects of supported protocols, candidate vaults, and existing portfolio positions.
+
+Examples include:
 
 - Total Value Locked (TVL)
-- Withdrawable liquidity
-- Available lending capacity
-- Protocol interest rates
-- Vault share prices
-- Reward emissions
-- Collateral composition
-- Underlying asset quality
-- Protocol-specific oracle data
+- withdrawable liquidity
+- available lending capacity
+- protocol interest rates
+- vault share prices
+- reward emissions
+- collateral composition
+- underlying asset quality
+- protocol-specific oracle data
 
-These inputs are combined with the user's own allocation rules and portfolio constraints before any decision is made.
+These inputs are evaluated alongside the user's own preferences, constraints, and investment profile before any portfolio changes are considered.
 
 ---
 
 ## Direct On-Chain Reads
 
-Whenever practical, Yield Seeker derives information directly from protocol contracts.
+Whenever practical, Yieldseeker derives information directly from protocol smart contracts.
 
 Examples include:
 
 - TVL and available liquidity
-- Maximum deposit capacity
-- Collateral dependencies
-- Vault accounting
-- Lending rates
-- Share prices
+- maximum deposit capacity
+- collateral dependencies
+- vault accounting
+- lending rates
+- share prices
 
-This allows the protocol to verify conditions independently instead of trusting external APIs or protocol-reported metrics.
+This allows the protocol to verify conditions independently rather than relying solely on external APIs or protocol-reported metrics.
 
 ---
 
 ## Asset Quality Assessment
 
-Yield Seeker also evaluates the quality of collateral assets backing supported vaults.
+Yieldseeker also evaluates the quality of collateral assets backing supported vaults.
 
-Rather than simply accepting that an asset is liquid because it has been listed by another protocol, the allocation engine considers factors such as:
+Rather than assuming an asset is suitable simply because it has been listed by another protocol, the Allocation Engine considers factors such as:
 
 - on-chain liquidity
 - trading volume
 - market depth
 - transaction activity
 
-Assets that fail internal quality requirements may be excluded from allocation.
+Assets that fail internal quality requirements may become ineligible for future allocations.
 
 ---
 
 ## Continuous Portfolio Optimisation
 
-As market conditions evolve, the allocation engine determines whether rebalancing would improve expected long-term returns.
+As market conditions evolve, the Allocation Engine determines whether rebalancing would improve expected long-term portfolio quality.
 
-When appropriate, agents may:
+When appropriate, Agents may:
 
 - move capital between supported protocols
 - rebalance portfolio allocations
 - compound earned rewards
 - convert reward tokens into the portfolio's base asset
 
-Execution only occurs when the expected benefit justifies the associated transaction costs and remains consistent with the user's configured risk preferences.
+Execution only occurs when the expected benefit justifies the associated transaction costs and remains consistent with the user's configured investment profile, preferences, and constraints.
+
+---
+
+## Protocol Safety Parameters
+
+Not every monitoring parameter is configurable by users.
+
+In addition to market conditions and user-defined preferences, Yieldseeker maintains a small number of protocol safety parameters that protect the integrity of the allocation framework.
+
+These parameters are managed by the protocol and cannot be overridden by individual Agents.
+
+For example, if a supported vault or protocol is identified as presenting an unacceptable level of risk—such as a security incident, operational issue, or other material concern—it can be marked as ineligible for future allocations.
+
+Where appropriate, Agents may also be instructed to withdraw from affected positions as part of a coordinated protocol-wide safety response.
+
+This allows the protocol to respond quickly to changing conditions while preserving the normal allocation process for all other opportunities.
 
 ---
 
 ## Continuous Risk Assessment
 
-Monitoring is not limited to yield opportunities.
+Monitoring is not limited to identifying better yield opportunities.
 
-The allocation engine also evaluates whether existing positions continue to satisfy the protocol's eligibility requirements.
+The Allocation Engine continuously evaluates whether existing positions continue to satisfy the protocol's eligibility requirements and safety parameters.
 
-If a supported protocol no longer satisfies those requirements, the engine may reduce or remove exposure where possible.
+If an existing position no longer satisfies those requirements—or becomes subject to a protocol safety restriction—the Allocation Engine may reduce or remove exposure where appropriate.
 
 This allows portfolios to adapt as the ecosystem evolves rather than relying on static assumptions established at the time of deposit.
