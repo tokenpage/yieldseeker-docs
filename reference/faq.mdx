@@ -1,102 +1,124 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about Yield Seeker."
+description: "Frequently asked questions about Yieldseeker."
 ---
 
 # FAQ
 
-## What assets does Yield Seeker currently support?
+## What assets does Yieldseeker currently support?
 
-Yield Seeker currently supports **USDC** on the **Base** network.
+Yieldseeker currently supports **USDC** on the **Base** network.
 
 Support for additional assets, including **cbBTC** and **wETH**, has already been integrated into the protocol architecture and will become available as additional vaults are enabled.
 
 ---
 
-## How does the allocation engine make decisions?
+## How does the Allocation Engine make decisions?
 
 Every allocation follows the same structured decision pipeline.
 
-Candidate vaults are first evaluated against eligibility requirements before being scored based on yield, liquidity, protocol characteristics, and portfolio constraints.
+Candidate vaults first pass through eligibility requirements before being assessed using protocol-defined parameters such as liquidity, collateral quality, market conditions, and portfolio constraints.
 
-Only after these stages are complete does the execution framework perform any on-chain transactions.
+Only after these stages are complete does the Execution Framework perform any on-chain transactions.
 
 For more information, see **Decision Pipeline**.
 
 ---
 
-## Does Yield Seeker simply choose the highest APY?
+## Does Yieldseeker simply choose the highest APY?
 
 No.
 
-The allocation engine optimises for long-term, risk-adjusted returns rather than the highest advertised APY.
+The Allocation Engine seeks to optimise for long-term, risk-adjusted returns rather than the highest advertised APY.
 
-Factors such as liquidity, transaction costs, collateral quality, diversification, and user preferences all influence allocation decisions.
+It considers many parameters—including liquidity, collateral quality, diversification, transaction costs, market conditions, and user preferences—to identify suitable opportunities.
 
 ---
 
-## Can I tell my agent to avoid certain protocols?
+## Can I customise how my Agent invests?
 
 Yes.
 
-Agents support natural-language rules that allow you to customise portfolio behaviour.
+Agents support natural-language preferences and constraints that allow you to personalise portfolio behaviour.
 
 Examples include:
 
 - Never use a particular vault.
 - Only allocate to specific protocols.
-- Always maintain a minimum allocation in one protocol.
+- Maintain a minimum allocation in one protocol.
 - Prefer stability over maximum yield.
 
-These preferences become persistent rules for that individual agent.
+These preferences become persistent rules for that individual Agent.
 
 ---
 
-## Can I see why my agent made a decision?
+## Can I override my Agent's decisions?
 
 Yes.
 
-Every agent includes a **Discuss** tab where you can ask questions about current allocations, previous decisions, active rules, or portfolio changes.
+Agents are autonomous, but not inflexible.
 
-The agent explains its reasoning in natural language.
+You can update your Agent's preferences, switch between Investment Profiles, or withdraw your assets at any time.
 
----
-
-## How often does my agent rebalance?
-
-Agents continuously evaluate supported opportunities at regular intervals.
-
-Rebalancing only occurs when the expected improvement justifies the associated transaction costs and remains consistent with your configured risk profile.
+This allows you to influence how your Agent behaves without managing every allocation manually.
 
 ---
 
-## Can the agent move funds anywhere on-chain?
+## Can I see why my Agent made a decision?
+
+Yes.
+
+You can ask your Agent why a portfolio change occurred, why a particular vault was selected, or how your preferences influenced an allocation.
+
+The Agent explains its reasoning in natural language.
+
+---
+
+## How often does my Agent rebalance?
+
+Agents continuously monitor supported opportunities and existing portfolio positions.
+
+Portfolio evaluations occur at regular intervals, while rebalancing only takes place when the expected improvement justifies the associated transaction costs and remains consistent with your configured Investment Profile and preferences.
+
+---
+
+## Can my Agent move funds anywhere on-chain?
 
 No.
 
 Agents cannot execute arbitrary blockchain transactions.
 
-Every action must pass through registered adapters, interact only with approved protocol targets, and satisfy protocol-specific validation before execution is permitted.
+Every action must pass through registered protocol adapters, interact only with approved protocol targets, and satisfy protocol-specific validation before execution is permitted.
 
-For more information, see **Execution Model**.
+For more information, see **Execution Framework**.
 
 ---
 
-## Does Yield Seeker have access to my funds?
+## Does Yieldseeker support every DeFi protocol?
+
+No.
+
+Yieldseeker only allocates to protocols that have been explicitly integrated into the Execution Framework through dedicated protocol adapters.
+
+Every new integration undergoes technical review before becoming eligible for allocation.
+
+---
+
+## Does Yieldseeker have access to my funds?
 
 No.
 
 Only the owner of an Agent Wallet can initiate withdrawals.
 
-Yield Seeker cannot withdraw assets from your wallet or transfer them to arbitrary destinations.
+Yieldseeker cannot withdraw assets from your wallet or transfer them to arbitrary destinations.
 
 ---
 
-## What happens if Yield Seeker goes offline?
+## What happens if Yieldseeker goes offline?
 
 Your assets remain inside your Agent Wallet.
 
-If the frontend is unavailable, our team can assist you in interacting directly with the underlying smart contracts to recover your assets.
+If the application is temporarily unavailable, you can interact directly with the underlying smart contracts to recover your assets. Where appropriate, the Yieldseeker team can provide guidance during that process.
 
 The application provides convenience—not custody.
 
@@ -104,11 +126,13 @@ The application provides convenience—not custody.
 
 ## What happens if one of the supported protocols is exploited?
 
-Yield Seeker continuously monitors supported protocols.
+Yieldseeker continuously monitors supported protocols and vaults.
 
-If elevated risk is detected, the allocation engine may attempt to reduce or remove exposure where possible.
+If elevated risk is detected, the affected protocol or vault may be marked as ineligible for future allocations through the protocol's safety parameters.
 
-However, as with any DeFi protocol, no system can guarantee immediate exits during extreme market-wide liquidity events.
+Where appropriate, Agents may also withdraw from affected positions before reallocating capital to other supported opportunities.
+
+As with any DeFi protocol, however, no system can guarantee immediate exits during extreme market-wide liquidity events.
 
 ---
 
@@ -118,29 +142,30 @@ Yes.
 
 Users can withdraw their assets whenever they choose.
 
-Withdrawals are initiated by the wallet owner and do not require approval from Yield Seeker.
+Withdrawals are initiated exclusively by the owner of the Agent Wallet and do not require approval from Yieldseeker.
 
 ---
 
 ## How are new protocols added?
 
-Yield Seeker supports new protocols through modular adapters.
+Yieldseeker supports new protocols through dedicated protocol adapters.
 
-Before becoming available, new integrations must be:
+Before a new integration becomes available, it must be:
 
-- reviewed
-- registered on-chain
+- technically reviewed
+- implemented through a dedicated protocol adapter
+- registered within the Adapter Registry
 - approved through hardware-backed multisignature controls
 - protected by a four-day administrative timelock
 
-This ensures protocol extensions remain transparent and predictable.
+This process helps ensure that protocol extensions remain transparent, predictable, and secure.
 
 ---
 
-## Has Yield Seeker been audited?
+## Has Yieldseeker been audited?
 
 Yes.
 
-Yield Seeker's smart contracts have been independently audited by **Nethermind**.
+Yieldseeker's smart contracts have been independently audited by **Nethermind**.
 
-The full audit report and source code are publicly available from the project's GitHub repository.
+The audit report and the protocol's smart contract source code are publicly available.

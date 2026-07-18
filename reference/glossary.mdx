@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-description: "Definitions of common terms used throughout the Yield Seeker documentation."
+description: "Definitions of common terms used throughout the Yieldseeker documentation."
 ---
 
 # Glossary
@@ -13,7 +13,7 @@ A protocol-specific smart contract responsible for validating and executing inte
 
 ## Adapter Registry
 
-The on-chain registry that maintains the list of approved adapters and supported protocol targets.
+The on-chain registry that maintains the list of approved protocol adapters and supported protocol targets.
 
 Agents cannot interact with protocols that are not registered here.
 
@@ -21,19 +21,19 @@ Agents cannot interact with protocols that are not registered here.
 
 ## Agent
 
-An autonomous portfolio manager that continuously evaluates supported opportunities and manages an Agent Wallet within the protocol's execution constraints.
+An autonomous software system that continuously evaluates supported opportunities, determines portfolio allocations, and manages an Agent Wallet within the protocol's execution constraints.
 
 ---
 
 ## Agent Wallet
 
-An isolated smart wallet owned by a single user that holds assets and executes validated protocol interactions.
+An isolated Smart Account owned by a single user that holds assets and executes validated protocol interactions on behalf of an Agent.
 
 ---
 
 ## Allocation Engine
 
-The off-chain system responsible for evaluating opportunities, applying portfolio rules, and deciding how capital should be allocated.
+The off-chain system responsible for evaluating candidate vaults, applying protocol parameters and user preferences, and determining how capital should be allocated.
 
 ---
 
@@ -51,21 +51,21 @@ The annualised interest rate before compounding.
 
 ## Autoseek
 
-Yield Seeker's default portfolio strategy.
+Yieldseeker's default portfolio strategy.
 
-Autoseek continuously evaluates supported protocols, reallocates capital, compounds rewards, and seeks to maximise long-term risk-adjusted returns.
+Autoseek continuously evaluates supported protocols, reallocates capital, compounds rewards, and seeks to optimise long-term, risk-adjusted returns.
 
 ---
 
 ## Base
 
-Ethereum Layer 2 network developed by Coinbase where Yield Seeker currently operates.
+The Ethereum Layer 2 network developed by Coinbase where Yieldseeker currently operates.
 
 ---
 
 ## Candidate Vault
 
-Any supported vault that may be considered during the allocation process before eligibility filtering and scoring.
+Any supported vault that may be considered during the allocation process before eligibility requirements and portfolio evaluation are applied.
 
 ---
 
@@ -83,13 +83,21 @@ The process of reinvesting earned yield back into a portfolio to generate additi
 
 ## Constrained Execution
 
-Yield Seeker's execution model where agents can only perform explicitly authorised actions through registered adapters.
+Yieldseeker's execution model in which Agents can only interact with approved protocol targets through registered protocol adapters.
 
 ---
 
-## ERC-4337
+## Decision Pipeline
 
-Ethereum's Account Abstraction standard that enables smart accounts, sponsored transactions, and delegated execution.
+The sequence of stages through which every candidate vault passes before capital can be allocated, including eligibility, portfolio evaluation, allocation constraints, and execution.
+
+---
+
+## Discuss
+
+Yieldseeker's natural-language interface for interacting with an Agent.
+
+Users can ask questions about portfolio decisions, understand allocation changes, configure persistent preferences, and personalise how their Agent behaves over time.
 
 ---
 
@@ -99,11 +107,25 @@ An Ethereum standard that enables secure delegation of wallet capabilities while
 
 ---
 
-## Execution Model
+## Eligibility
 
-The framework through which agents execute validated blockchain transactions.
+The initial stage of the Decision Pipeline that determines whether a protocol or vault satisfies the minimum requirements for consideration.
 
-Every transaction passes through adapters and protocol-defined security checks.
+---
+
+## Execution Framework
+
+The subsystem responsible for safely executing validated blockchain transactions.
+
+Every transaction passes through dedicated protocol adapters and protocol-defined security checks before execution.
+
+---
+
+## Investment Profile
+
+A predefined portfolio configuration that influences how an Agent evaluates and allocates capital.
+
+Yieldseeker currently provides **Conservative** and **Explorative** Investment Profiles, each with different allocation parameters and default behaviour.
 
 ---
 
@@ -113,9 +135,9 @@ The amount of capital available within a protocol that can be deposited or withd
 
 ---
 
-## Merkl Rewards
+## Opportunity Assessment
 
-Protocol incentive tokens distributed by supported DeFi protocols that may be automatically claimed and compounded by Yield Seeker.
+The stage of the Decision Pipeline where eligible vaults are evaluated using protocol-defined parameters to determine their suitability for allocation.
 
 ---
 
@@ -125,9 +147,9 @@ See **Adapter**.
 
 ---
 
-## Registered Target
+## Protocol Safety Parameters
 
-A protocol contract that has been explicitly approved for interaction through the Adapter Registry.
+Protocol-managed safety rules that can temporarily restrict allocations or trigger protective actions when elevated risk is detected.
 
 ---
 
@@ -137,15 +159,25 @@ The process of moving capital between supported opportunities to improve expecte
 
 ---
 
-## Risk Profile
+## Registered Target
 
-A configurable set of allocation preferences that determines how conservative or exploratory an agent should behave.
+A protocol contract that has been explicitly approved for interaction through the Adapter Registry.
+
+---
+
+## Reward Tokens
+
+Tokens distributed by supported DeFi protocols as incentives in addition to the underlying yield.
+
+Yieldseeker may automatically claim, convert, and compound supported reward tokens on behalf of an Agent.
 
 ---
 
 ## Smart Account
 
-A programmable blockchain account that supports advanced features such as delegated execution and sponsored transactions.
+A programmable blockchain account capable of supporting advanced features such as delegated execution and sponsored transactions.
+
+Agent Wallets are implemented as Smart Accounts.
 
 ---
 
@@ -165,7 +197,7 @@ A hardware-isolated environment used by Coinbase to securely generate, store, an
 
 A mandatory delay applied to administrative protocol changes before they become active.
 
-Yield Seeker uses a four-day timelock for protocol extensions and new capabilities.
+Yieldseeker uses a four-day timelock for protocol extensions and new capabilities.
 
 ---
 
@@ -173,7 +205,15 @@ Yield Seeker uses a four-day timelock for protocol extensions and new capabiliti
 
 The total value of assets deposited within a protocol or vault.
 
-TVL is one of several signals considered during portfolio allocation.
+TVL is one of several parameters considered during portfolio evaluation.
+
+---
+
+## User Preferences
+
+Persistent natural-language instructions that personalise how an individual Agent allocates capital.
+
+User Preferences complement an Agent's Investment Profile and are continuously considered by the Allocation Engine when evaluating opportunities.
 
 ---
 
@@ -183,12 +223,12 @@ A core design principle ensuring users retain ownership of their assets and main
 
 ---
 
-## Verify, Don't Trust
-
-Yield Seeker's philosophy of deriving information directly from on-chain state wherever possible rather than relying on third-party reported data.
-
----
-
 ## Vault
 
 A DeFi strategy or lending market where assets are deposited to generate yield.
+
+---
+
+## Verify, Don't Trust
+
+Yieldseeker's philosophy of verifying protocol state directly from on-chain data wherever possible rather than relying on third-party reported information.
